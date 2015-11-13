@@ -1,0 +1,9 @@
+#chat-bottom {
+    position: fixed;
+    bottom: 10px;
+}
+
+.panel-body {
+    overflow-y: scroll;
+    height: 85%;
+}
