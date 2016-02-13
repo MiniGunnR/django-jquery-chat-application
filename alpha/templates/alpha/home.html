@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Chat Panel</title>
+    <div><title>Chat Panel</title></div>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'chat.css' %}">
@@ -13,11 +13,12 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
 </head>
 
 <body>
     <div id="chat-body" class="panel panel-default">
-        <div class="panel-heading">Chat Box</div>
+        <div class="panel-heading">Monkey Bomb Chat Box</div>
         <div id="msg-list-div" class="panel-body">
             <ul id="msg-list" class="list-group">
                 {% for obj in chat %}
@@ -34,6 +35,9 @@
                     chatlist.scrollTop = chatlist.scrollHeight;
                 </script>
             </ul>
+
+            <div><a class="btn btn-warning" id="clearall" type="Logout" value="Logout" href="../logout">Logout</a></div>
+            
         </div>
     </div>
 
@@ -41,11 +45,13 @@
         <div id="chat-bottom" class="input-group">
             <input type="text" id="chat-msg" name="chat-msg" class="form-control"/>
             <span class="input-group-btn">
-                <input class="btn btn-default" id="send" type="submit" value="Send"/>
+            <div>
+                <input class="btn btn-primary" id="send" type="submit" value="Send"/>
+            </div>
+
             </span>
         </div>
     </form>
 </body>
-
 <script src="{% static 'chat.js' %}"></script>
 </html>

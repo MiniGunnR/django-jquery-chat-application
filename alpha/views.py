@@ -5,6 +5,13 @@ from chat_app import settings
 
 from .models import Chat
 
+def test(request):
+    return render(request,'alpha/test.html',{'next': next})
+
+def index(request):
+    #return render_to_response('index.html')
+    return render(request, 'alpha/login.html', {'next': next})
+
 def Login(request):
     next = request.GET.get('next', '/home/')
     if request.method == "POST":
@@ -23,7 +30,8 @@ def Login(request):
     return render(request, "alpha/login.html", {'next': next})
 
 def Logout(request):
-    logout(request)
+    #logout(request)
+    Chat.objects.all().delete()
     return HttpResponseRedirect('/login/')
 
 def Home(request):
@@ -43,3 +51,4 @@ def Post(request):
 def Messages(request):
     c = Chat.objects.all()
     return render(request, 'alpha/messages.html', {'chat': c})
+
