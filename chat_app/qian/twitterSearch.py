@@ -4,7 +4,7 @@ class twitterSearch(object):
 
 
 	def _init_(self):
-		self.userInfo = "Name found in Twitter: "
+		self.public_users = []
 
 	def searchName(self, nameIn=None):
 		if(nameIn == None):
@@ -13,23 +13,11 @@ class twitterSearch(object):
 		auth.set_access_token('1965122641-9PQ8264p3RDbY4K1nxXDDV8bB3BVHtBGT1D80Pp', 'JbcQxTUBwwaommlDcNNMcqedKl0fLlFHxtfNBUkMp9NRc')
 
 		api = tweepy.API(auth)
-		userInfo = "Name found in Twitter: \n"
-		public_users = api.search_users(nameIn)
-		for users in public_users:
-			userInfo += "id: " + users.id_str + " ";
-			if(users.name):
-				userInfo += "  Name: " + users.name + " "
-			else:
-				userInfo += "  Name: not found "
-				continue
-			if(users.location):
-				userInfo += "  Location: " + users.location + "\n"
-			else:
-				userInfo += "  Location: not found \n"
-				continue
-			
-		return userInfo
+		self.useruserInfo = "Name found in Twitter: \n"
+		self.public_users = api.search_users(nameIn)
+		result=[]
+		for users in self.public_users:
+			result.append([users.id_str, users.name, users.location])
+		return result
 
 
-a = twitterSearch()
-print a.searchName("QIAN")
