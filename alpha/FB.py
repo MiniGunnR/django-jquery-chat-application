@@ -4,7 +4,7 @@ import requests
 
 class FB(object):
 	def __init__(self):
-		self.token = 'CAACEdEose0cBALKZAd93Ukoz7vyM86VJtGFCpquOZCB4DT82RXpS7Tk40mpoHCY3K38yXZA4c92JXPlQkOHmIXQ3dzZA1vtZAZAZAznxQED9wvj6LZAS62sZBZBnWmLUSf31piiHnv1kYUUgMLxon2ADldGOKmmdivpFondarJU6VJB9I6mhIycgrwUQ3D1h7EZClNHM4qI4I7kxQZDZD'
+		self.token = 'CAACEdEose0cBALFFzxZAUf5pRjAkRni9Cijpugu51uovazCJpkrNhexv2gU8hjQhV9fRAY85Bh9ufzw2ZA4LCsS6w7J59dSjMO7pBn5CjEIthgSpzYZBPePfb8e1ZAjxVE22ycxZCMaXpsr32FE0bvgMFlZBT8kkDbZAmZC2AappyGuixdFXXagPAfS3HNAqFrd1ct7afZB6jNQZDZD'
 	def searchUser(self,name):
 		if not isinstance(name,str) or len(name)<=0:
 			raise Exception("Error type")

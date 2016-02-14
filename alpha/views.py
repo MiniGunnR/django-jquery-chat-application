@@ -6,6 +6,7 @@ from chat_app import settings
 from .models import Chat
 from FB import FB
 from Parse import Parse
+from twitterSearch import twitterSearch
 
 def test(request):
     return render(request,'alpha/test.html',{'next': next})
@@ -49,10 +50,12 @@ def Post(request):
 
         #if(msg[0:6] == "Robot:"):
         callRobot(msg, request)
-        print msg       
+            
+        
         msg = c.user.username+": "+msg
 
         c = Chat(user=request.user, message=msg)
+
         if msg != '':            
             c.save()
         #mg = src="https://scontent-ord1-1.xx.fbcdn.net/hprofile-xaf1/v/t1.0-1/p160x160/11070096_10204126647988048_6580328996672664529_n.jpg?oh=f9b916e359cd7de9871d8d8e0a269e3d&oe=576F6F12"
@@ -65,9 +68,10 @@ def Messages(request):
     return render(request, 'alpha/messages.html', {'chat': c})
 
 def callRobot(txt,request):
+
     parse = Parse()
-    decision = parse.outputString(str(txt))
     result = []
+    decision = parse.outputString(str(txt))
     if decision[0][0]==1:
         fb = FB()
         temp = fb.searchUser(str(decision[1]))
@@ -78,21 +82,27 @@ def callRobot(txt,request):
     if decision[0][1]==1:
         twitter = twitterSearch()
         temp = twitter.searchName(str(txt))
-        result.append("Result from twitter Total results are :"+str(count(temp))+"\n")
+        result.append("Result from twitter Total results are :"+str(len(temp))+"\n")
         for i in temp:
             result.append("UserID:"+i[0]+"\tUser Full Name:"+i[1]+"\tUser location"+i[2]+"\n")
-    
-   
     #result = fb.searchUser(str(txt))
     message=""
+
     for i in result:
         message = message+i
 
     #for i in range(1,1000):
      #   print message.decode('unicode-escape')
-    msg = message.decode('unicode-escape')
+    # for i in range(1,300):
+    #     print message[1791:1793]
+    #msg = message.decode('unicode-escape')
+
+    
+    #print result
+
+    msg = message
     user = GetRobot(request,msg)
-    print msg
+  
     return msg
 
 def GetRobot(request,msg):
@@ -100,9 +110,9 @@ def GetRobot(request,msg):
    # password = request.POST['123']
     user = authenticate(username="Robot", password=123)
     c = Chat(user=user, message=msg)
-
     if msg != '':            
         c.save()
+    print c.message
     return user
 # def WelcomeUser(user):
 #     msg = "Welcome  "+user.username

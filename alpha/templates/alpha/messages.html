@@ -9,8 +9,8 @@
 {% endfor %} -->
  {% for obj in chat %}
         {%if obj.user.username == "Robot"%}
-              <li class="list-group-item-item" style="font-size:24px;color:red"><center>{{ obj.message }}</center></li>
-        	 <!--  <img src="{{MEDIA_URL}"}/> -->
+              <li class="list-group-item-item" style="font-size:20px;color:red"><center>{{ obj.message }}</center></li>
+
         {%elif obj.user == request.user and obj.user.username != "Robot"%}
             <li class="text-right list-group-item">{{ obj.message }}</li>
         {%else%}

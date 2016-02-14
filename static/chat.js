@@ -21,6 +21,7 @@ $('#chat-form').on('submit', function(event){
 function getMessages(){
     if (!scrolling) {
         $.get('/messages/', function(messages){
+            console.log(messages);
             $('#msg-list').html(messages);
             var chatlist = document.getElementById('msg-list-div');
             chatlist.scrollTop = chatlist.scrollHeight;

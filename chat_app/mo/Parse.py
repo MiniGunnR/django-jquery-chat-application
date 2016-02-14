@@ -18,6 +18,3 @@ class Parse(object):
 
 		outputString = inputstring.strip()
 		return (self.mode,outputString)
-
-test = Parse()
-print test.outputString("hello world facebook twitter")
