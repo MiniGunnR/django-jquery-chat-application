@@ -42,8 +42,9 @@ def Post(request):
     if request.method == "POST":
         msg = request.POST.get('msgbox', None)
         c = Chat(user=request.user, message=msg)
-        if msg != '':
+        if msg != '':            
             c.save()
+
         return JsonResponse({ 'msg': msg, 'user': c.user.username })
     else:
         return HttpResponse('Request must be POST.')
@@ -52,3 +53,9 @@ def Messages(request):
     c = Chat.objects.all()
     return render(request, 'alpha/messages.html', {'chat': c})
 
+def postToServer(txt):
+    c=Chat.objects.create("11111")
+    b=Chat.objects.create(txt+"    edddasdadsa")
+    c.save()
+    b.save()
+    return

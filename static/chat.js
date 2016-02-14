@@ -15,6 +15,8 @@ $('#chat-form').on('submit', function(event){
     });
 });
 
+
+
 function getMessages(){
     if (!scrolling) {
         $.get('/messages/', function(messages){
@@ -38,10 +40,10 @@ $(document).ready(function() {
      $('#send').attr('disabled','disabled');
      $('#chat-msg').keyup(function() {
         if($(this).val() != '') {
-           $('#send').removeAttr('disabled');
+            $('#send').removeAttr('disabled');
         }
         else {
-        $('#send').attr('disabled','disabled');
+            $('#send').attr('disabled','disabled');
         }
      });
  });
