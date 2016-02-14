@@ -1,10 +1,9 @@
-import urllib2
 import json
 import requests
 
 class FB(object):
 	def __init__(self):
-		self.token = 'CAACEdEose0cBAJLk4NK2YLeqESNuqCNdVyRtsZCVlCnyngy55Mlk0Du1ZCZAZAoTtdfcJDKFNo9MM75gzhZCZBks10U9Gpn8oqRzioaCLrOtf5AFUMmZCYS6RXvuxddJfBZBCAmzKDh3hd6RZCt4QIh39lZA9Y5IzIgTUKKw2nOiBTytPUPMv3dsMUlHSPh5QDRBt7RfRzxEupWQZDZD'
+		self.token ='CAACEdEose0cBALKZAd93Ukoz7vyM86VJtGFCpquOZCB4DT82RXpS7Tk40mpoHCY3K38yXZA4c92JXPlQkOHmIXQ3dzZA1vtZAZAZAznxQED9wvj6LZAS62sZBZBnWmLUSf31piiHnv1kYUUgMLxon2ADldGOKmmdivpFondarJU6VJB9I6mhIycgrwUQ3D1h7EZClNHM4qI4I7kxQZDZD'
 	def searchUser(self,name):
 		if not isinstance(name,str) or len(name)<=0:
 			raise Exception("Error type")

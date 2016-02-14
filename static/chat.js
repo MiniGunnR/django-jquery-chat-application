@@ -7,6 +7,7 @@ $('#chat-form').on('submit', function(event){
         data : { msgbox : $('#chat-msg').val() },
 
         success : function(json){
+            console.log(json);
             $('#chat-msg').val('');
             $('#msg-list').append('<li class="text-right list-group-item">' + json.msg + '</li>');
             var chatlist = document.getElementById('msg-list-div');

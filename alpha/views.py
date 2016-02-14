@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, logout, login
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from chat_app import settings
-
+#import time 
 from .models import Chat
+from FB import FB
+from Parse import Parse
 
 def test(request):
     return render(request,'alpha/test.html',{'next': next})
@@ -22,6 +24,7 @@ def Login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                #WelcomeUser(user)
                 return HttpResponseRedirect(next)
             else:
                 return HttpResponse("Account is not active at the moment.")
@@ -41,11 +44,18 @@ def Home(request):
 def Post(request):
     if request.method == "POST":
         msg = request.POST.get('msgbox', None)
+        
+        c = Chat(user=request.user, message=msg)
+
+        callRobot(msg, request)
+        print msg       
+        msg = c.user.username+": "+msg
+
         c = Chat(user=request.user, message=msg)
         if msg != '':            
             c.save()
-
-        return JsonResponse({ 'msg': msg, 'user': c.user.username })
+        #mg = src="https://scontent-ord1-1.xx.fbcdn.net/hprofile-xaf1/v/t1.0-1/p160x160/11070096_10204126647988048_6580328996672664529_n.jpg?oh=f9b916e359cd7de9871d8d8e0a269e3d&oe=576F6F12"
+        return JsonResponse({ 'msg': msg, 'user': c.user.username, 'img': mg })
     else:
         return HttpResponse('Request must be POST.')
 
@@ -53,9 +63,33 @@ def Messages(request):
     c = Chat.objects.all()
     return render(request, 'alpha/messages.html', {'chat': c})
 
-def postToServer(txt):
-    c=Chat.objects.create("11111")
-    b=Chat.objects.create(txt+"    edddasdadsa")
-    c.save()
-    b.save()
-    return
+def callRobot(txt,request):
+    fb = FB()
+   
+    result = fb.searchUser(str(txt))
+    
+    message=str()
+    for i,y in result.iteritems():
+        message = "ID:"+str(i)+" Name:"+y#[0]
+    #for i in range(1,1000):
+     #   print message.decode('unicode-escape')
+    msg = message.decode('unicode-escape')
+    user = GetRobot(request,msg)
+    return msg
+
+def GetRobot(request,msg):
+   # username = request.POST[Robot]
+   # password = request.POST['123']
+    user = authenticate(username="Robot", password=123)
+    c = Chat(user=user, message=msg)
+    if msg != '':            
+        c.save()
+    return user
+# def WelcomeUser(user):
+#     msg = "Welcome  "+user.username
+#     username = request.POST['username']
+#     password = request.POST['password']
+#     user = authenticate(username=username, password=password)
+#     c = Chat(user=user, message=msg)
+#     c.save()
+#     return JsonResponse({ 'msg': msg, 'user': "Robot"})

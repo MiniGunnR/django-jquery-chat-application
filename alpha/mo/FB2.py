@@ -4,14 +4,12 @@ import requests
 
 class FB(object):
 	def __init__(self):
-		self.token = 'CAACEdEose0cBALKZAd93Ukoz7vyM86VJtGFCpquOZCB4DT82RXpS7Tk40mpoHCY3K38yXZA4c92JXPlQkOHmIXQ3dzZA1vtZAZAZAznxQED9wvj6LZAS62sZBZBnWmLUSf31piiHnv1kYUUgMLxon2ADldGOKmmdivpFondarJU6VJB9I6mhIycgrwUQ3D1h7EZClNHM4qI4I7kxQZDZD'
+		self.token = 'CAACEdEose0cBAJLk4NK2YLeqESNuqCNdVyRtsZCVlCnyngy55Mlk0Du1ZCZAZAoTtdfcJDKFNo9MM75gzhZCZBks10U9Gpn8oqRzioaCLrOtf5AFUMmZCYS6RXvuxddJfBZBCAmzKDh3hd6RZCt4QIh39lZA9Y5IzIgTUKKw2nOiBTytPUPMv3dsMUlHSPh5QDRBt7RfRzxEupWQZDZD'
 	def searchUser(self,name):
-		print name
 		if not isinstance(name,str) or len(name)<=0:
 			raise Exception("Error type")
 		originalData = requests.get('https://graph.facebook.com/search?q='+name+'&type=user&access_token='+self.token)
 		data = originalData.json()
-		print data
 		if u'data' in data:
 			if len(data[u'data'])<0:
 				print "No Result in facebook"
@@ -21,7 +19,6 @@ class FB(object):
 				for i in data[u'data']:
 					pict = requests.get('https://graph.facebook.com/v2.5/'+i[u'id']+'/picture/')
 					result[i[u'id']] =(i[u'name'],pict.url) 
-				print result
 				return result
 		
 	def searchDetailInfo(self,id):
@@ -39,11 +36,11 @@ class FB(object):
 		return result
 
 
-# test=FB()
-# hello = test.searchUser("yusheng ding")
-# for i,y in hello.iteritems():
-# 	print i+" "+y[0]
-# 	print y[1]
-# he = test.searchDetailInfo("216311481960")
-# for i,y in he.iteritems():
-# 	print i+":	"+y
+test=FB()
+hello = test.searchUser("yusheng ding")
+for i,y in hello.iteritems():
+	print i+" "+y[0]
+	print y[1]
+he = test.searchDetailInfo("216311481960")
+for i,y in he.iteritems():
+	print i+":	"+y

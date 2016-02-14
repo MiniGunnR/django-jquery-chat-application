@@ -21,14 +21,18 @@
         <div class="panel-heading">Monkey Bomb Chat Box</div>
         <div id="msg-list-div" class="panel-body">
             <ul id="msg-list" class="list-group">
+              
                 {% for obj in chat %}
-                    {% if obj.user == request.user %}
+                        {%if obj.user.username == "Robot"%}
+                        <li class="list-group-item-item" style="font-size:24px;color:red"><center>{{ obj.message }}</center></li>
+                      
+                        {%elif obj.user == request.user and obj.user.username != "Robot"%}
                         <li class="text-right list-group-item">{{ obj.message }}</li>
-                    {% else %}
+                            {%else%}
                         <li class="text-left list-group-item">{{ obj.message }}</li>
-                    {% endif %}
-                {% empty %}
-                    <li class="text-right list-group-item">No messages yet!</li>
+                        {%endif%}   
+                        {% empty %}
+                        <li class="text-right list-group-item">No messages yet!</li>
                 {% endfor %}
                 <script>
                     var chatlist = document.getElementById('msg-list-div');
