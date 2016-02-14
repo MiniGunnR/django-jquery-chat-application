@@ -17,7 +17,8 @@ class FB(object):
 			else:
 				result = dict()
 				for i in data[u'data']:
-					result[i[u'id']] =i[u'name'] 
+					pict = requests.get('https://graph.facebook.com/v2.5/'+i[u'id']+'/picture/')
+					result[i[u'id']] =(i[u'name'],pict.url) 
 				return result
 		
 	def searchDetailInfo(self,id):
@@ -38,7 +39,8 @@ class FB(object):
 test=FB()
 hello = test.searchUser("yusheng ding")
 for i,y in hello.iteritems():
-	print i+":	"+y
+	print i+" "+y[0]
+	print y[1]
 he = test.searchDetailInfo("216311481960")
 for i,y in he.iteritems():
 	print i+":	"+y
