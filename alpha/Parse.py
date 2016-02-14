@@ -1,3 +1,4 @@
+import re
 class Parse(object):
 	def __init__(self):
 		self.mode=[0,0,0]
@@ -12,12 +13,9 @@ class Parse(object):
 		if inputstring.find("twitter")>=0:
 			self.mode[1] = 1
 			inputstring=inputstring.replace("twitter","")
-		if inputstring.find("instagram")>=0:
+		for i in range(200):
+			print inputstring
+		if re.search("\s*\d+\s*",inputstring):
 			self.mode[2] = 1
-			inputstring=inputstring.replace("instagram","")
-
 		outputString = inputstring.strip()
 		return (self.mode,outputString)
-
-test = Parse()
-print test.outputString("hello world facebook twitter")

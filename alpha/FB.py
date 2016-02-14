@@ -24,7 +24,9 @@ class FB(object):
 	def searchDetailInfo(self,id):
 		originalData = requests.get('https://graph.facebook.com/'+id+'?access_token='+self.token)
 		data = originalData.json()
+		picurl = requests.get('https://graph.facebook.com/'+id+'/picture').url
 		result=dict()
+		result['pic'] = picurl
 		if u'name' in data:
 			result[u'name'] = data[u'name']
 		if u'category' in data:

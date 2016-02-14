@@ -85,6 +85,19 @@ def callRobot(txt,request):
         result.append("Result from twitter Total results are :"+str(len(temp))+"\n")
         for i in temp:
             result.append("UserID:"+i[0]+"\tUser Full Name:"+i[1]+"\tUser location"+i[2]+"\n")
+    if decision[0][2]==1:
+        fb = FB()
+        temp = fb.searchDetailInfo(str(txt))
+        if "name" in temp:
+            result.append("Name:    "+temp["name"])
+        if "category" in temp:
+            result.append("\tCategory:  "+temp["category"])
+        if "birthday" in temp:
+            result.append("\tBirthday:  "+temp["birthday"])
+        if "about" in temp:
+            result.append("\tAbout: "+temp["about"])
+        if "pic" in temp:
+            result.append("\tPicture:   "+temp["pic"]+"\n")
     #result = fb.searchUser(str(txt))
     message=""
 
