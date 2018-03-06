@@ -7,6 +7,7 @@ $('#chat-form').on('submit', function(event){
         data : { msgbox : $('#chat-msg').val() },
 
         success : function(json){
+            console.log(json);
             $('#chat-msg').val('');
             $('#msg-list').append('<li class="text-right list-group-item">' + json.msg + '</li>');
             var chatlist = document.getElementById('msg-list-div');
@@ -15,9 +16,12 @@ $('#chat-form').on('submit', function(event){
     });
 });
 
+
+
 function getMessages(){
     if (!scrolling) {
         $.get('/messages/', function(messages){
+            console.log(messages);
             $('#msg-list').html(messages);
             var chatlist = document.getElementById('msg-list-div');
             chatlist.scrollTop = chatlist.scrollHeight;
@@ -31,17 +35,17 @@ $(function(){
     $('#msg-list-div').on('scroll', function(){
         scrolling = true;
     });
-    refreshTimer = setInterval(getMessages, 500);
+    refreshTimer = setInterval(getMessages, 100);
 });
 
 $(document).ready(function() {
      $('#send').attr('disabled','disabled');
      $('#chat-msg').keyup(function() {
         if($(this).val() != '') {
-           $('#send').removeAttr('disabled');
+            $('#send').removeAttr('disabled');
         }
         else {
-        $('#send').attr('disabled','disabled');
+            $('#send').attr('disabled','disabled');
         }
      });
  });
@@ -62,6 +66,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 var csrftoken = getCookie('csrftoken');
 
 function csrfSafeMethod(method) {

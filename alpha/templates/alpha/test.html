@@ -11,15 +11,15 @@
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
- 
+ {% csrf_token %}
 
 
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" method="post" action=".">
+			<form role="form">
 				<div class="form-group">
-					 {% csrf_token %}
+					 
 					<label for="exampleInputEmail1">
 						User ID
 					</label>
